@@ -1,7 +1,10 @@
 const express = require("express");
-
+const connectDB = require('./config/db')
 // initialize express into "app"
 const app = express();
+
+//connect Database
+connectDB();
 
 // testing route
 app.get("/", (req, res) => res.json({ msg: "Tabulate" }));
