@@ -1,3 +1,4 @@
 {
-    "mongoURI": "mongodb+srv://jlaro:password2021@tabulate.zz33k.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+    "mongoURI": "mongodb+srv://jlaro:password2021@tabulate.zz33k.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+    "jwtSecret": "secret"
 }
