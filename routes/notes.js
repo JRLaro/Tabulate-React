@@ -1,11 +1,23 @@
 const express = require('express');
 const router = express.Router();
+const auth = require('../middleware/auth');
+
+const {body, validationResult} = require('express-validator')
+
+const User = require('../models/User');
+const Note = require('../models/Note')
 
 //@route --> GET api/notes
 //@description --> Get all user notes
 //@access --> Private
-router.get('/', (req, res) => {
-  res.send('Get Notes');
+router.get('/', auth, async (req, res) => {
+  try {
+    const notes = await Note.find({ user: req.user.id }).sort({ date: -1 });
+    res.json(notes)
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('There appears to be a Server Error')
+  }
 });
 
 //@route --> POST api/notes
