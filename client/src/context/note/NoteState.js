@@ -1,5 +1,5 @@
 import React, { useReducer } from "react";
-import uuid from "uuid";
+import { v4 as uuidv4 } from 'uuid';
 import NoteContext from "./noteContext";
 import noteReducer from "./noteReducer";
 import {
@@ -22,17 +22,17 @@ const NoteState = (props) => {
       },
       {
         id: 2,
-        title: " Second TITLE",
+        title: "Second TITLE",
         body: " Second Body",
       },
       {
         id: 3,
-        title: " Third TITLE",
+        title: "Third TITLE",
         body: " Third Body",
       },
       {
         id: 4,
-        title: " Fourth TITLE",
+        title: "Fourth TITLE",
         body: " Fourth Body",
       },
     ],
@@ -41,7 +41,10 @@ const NoteState = (props) => {
     const [state, dispatch] = useReducer(noteReducer, initialState);
 
     //Add Note
-
+  const addNote = note => {
+    note.id = uuidv4();
+    dispatch({type: ADD_NOTE, payload: note})
+}
 
     //Delete Note
 
@@ -64,7 +67,8 @@ const NoteState = (props) => {
     return (
         <NoteContext.Provider
             value={{
-            notes:state.notes
+          notes: state.notes,
+              addNote
         }}>
             {props.children}
         </NoteContext.Provider>

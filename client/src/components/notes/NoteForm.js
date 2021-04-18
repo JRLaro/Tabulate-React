@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import NoteContext from "../../context/note/noteContext";
 
 function NoteForm() {
+  const noteContext = useContext(NoteContext);
+
   const [note, setNote] = useState({
     title: "",
     body: "",
@@ -14,8 +17,17 @@ function NoteForm() {
       [e.target.title]: e.target.value,
     });
 
+  const onSubmit = (e) => {
+    e.preventDefault();
+    noteContext.addNote(note);
+    setNote({
+      title: "",
+      body: "",
+    });
+  };
+
   return (
-    <form>
+    <form onSubmit={onSubmit}>
       <h2 className="text-primary">Add Note</h2>
 
       <input
