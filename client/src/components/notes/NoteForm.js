@@ -1,8 +1,20 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import NoteContext from "../../context/note/noteContext";
 
 function NoteForm() {
   const noteContext = useContext(NoteContext);
+  const { addNote, current, clearCurrent, updateNote } = noteContext;
+
+  useEffect(() => {
+    if (current !== null) {
+      setNote(current);
+    } else {
+      setNote({
+        title: "",
+        body: "",
+      });
+    }
+  }, [noteContext, current]);
 
   const [note, setNote] = useState({
     title: "",
@@ -18,17 +30,25 @@ function NoteForm() {
     });
 
   const onSubmit = (e) => {
-    e.preventDefault();
-    noteContext.addNote(note);
-    setNote({
-      title: "",
-      body: "",
-    });
+      e.preventDefault();
+      if (current === null) {
+          addNote(note);
+      } else {
+          updateNote(note);
+      }
+    // setNote({
+    //   title: "",
+    //   body: "",
+    // });
   };
+    
+    const clearAll = () => {
+      clearCurrent()
+  }
 
   return (
     <form onSubmit={onSubmit}>
-      <h2 className="text-primary">Add Note</h2>
+          <h2 className="text-primary">{current ? 'Edit Note' : 'Add Note'}</h2>
 
       <input
         type="text"
@@ -51,10 +71,13 @@ function NoteForm() {
       <div>
         <input
           type="submit"
-          value="Add Note"
+          value={current ? 'Edit Note' : 'Add Note'}
           className="btn btn-primary btn-block"
         />
-      </div>
+          </div>
+          {current && <div>
+              <button className="btn btn-light btn-block"onClick={clearAll}> Clear</button>
+          </div>}
     </form>
   );
 }

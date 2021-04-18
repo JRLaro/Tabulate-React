@@ -5,12 +5,13 @@ import NoteContext from "../../context/note/noteContext";
 function NoteItems({ note }) {
     const noteContext = useContext(NoteContext);
     
-    const {deleteNote} = noteContext
+    const {deleteNote, setCurrent, clearCurrent} = noteContext
 
   const { id, title, body } = note;
 
     const onDelete = () => {
         deleteNote(id);
+        clearCurrent();
     }
     
   return (
@@ -25,7 +26,7 @@ function NoteItems({ note }) {
         )}
       </ul>
       <p>
-        <button className="btn btn-dark btn-sm">Edit</button>
+        <button className="btn btn-dark btn-sm" onClick={() => setCurrent(note)}>Edit</button>
         <button className="btn btn-danger btn-sm" onClick={onDelete}>
           Delete
         </button>

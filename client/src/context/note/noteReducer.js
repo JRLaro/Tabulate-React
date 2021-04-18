@@ -15,10 +15,25 @@ export default (state, action) => {
         ...state,
         notes: [...state.notes, action.payload],
       };
+      case UPDATE_NOTE:
+        return {
+          ...state,
+          notes: state.notes.map(note => note.id === action.payload.id ? action.payload : note)
+        };
     case DELETE_NOTE:
       return {
         ...state,
         notes: state.notes.filter(note=> note.id !== action.payload),
+      };
+    case SET_CURRENT:
+      return {
+        ...state,
+        current: action.payload
+      };
+    case CLEAR_CURRENT:
+      return {
+        ...state,
+        current: null
       };
     default:
       return state;

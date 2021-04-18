@@ -37,6 +37,7 @@ const NoteState = (props) => {
         body: " Fourth Body",
       },
     ],
+    current: null
   };
 
   const [state, dispatch] = useReducer(noteReducer, initialState);
@@ -52,13 +53,21 @@ const NoteState = (props) => {
   const deleteNote = (id) => {
     dispatch({ type: DELETE_NOTE, payload: id });
   };
-
+  
   //Set Current Note
-
+  const setCurrent = (note) => {
+    dispatch({ type: SET_CURRENT, payload: note });
+  };
+  
   //Clear Current Note
+  const clearCurrent = () => {
+    dispatch({ type: CLEAR_CURRENT });
+  };
 
   //Update Note
-
+  const updateNote = (note) => {
+    dispatch({ type: UPDATE_NOTE, payload: note });
+  };
   //Filter Note
 
   //Clear Filter
@@ -67,8 +76,12 @@ const NoteState = (props) => {
     <NoteContext.Provider
       value={{
         notes: state.notes,
+        current: state.current,
         addNote,
         deleteNote,
+        setCurrent,
+        clearCurrent,
+        updateNote
       }}
     >
       {props.children}
