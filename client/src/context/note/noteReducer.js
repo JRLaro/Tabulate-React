@@ -15,25 +15,40 @@ export default (state, action) => {
         ...state,
         notes: [...state.notes, action.payload],
       };
-      case UPDATE_NOTE:
-        return {
-          ...state,
-          notes: state.notes.map(note => note.id === action.payload.id ? action.payload : note)
-        };
+    case UPDATE_NOTE:
+      return {
+        ...state,
+        notes: state.notes.map((note) =>
+          note.id === action.payload.id ? action.payload : note
+        ),
+      };
     case DELETE_NOTE:
       return {
         ...state,
-        notes: state.notes.filter(note=> note.id !== action.payload),
+        notes: state.notes.filter((note) => note.id !== action.payload),
       };
     case SET_CURRENT:
       return {
         ...state,
-        current: action.payload
+        current: action.payload,
       };
     case CLEAR_CURRENT:
       return {
         ...state,
-        current: null
+        current: null,
+      };
+    case FILTER_NOTE:
+      return {
+        ...state,
+        filtered: state.notes.filter((note) => {
+          const regex = new RegExp(`${action.payload}`, "gi");
+          return note.title.match(regex) || note.body.match(regex);
+        }),
+      };
+    case CLEAR_FILTER:
+      return {
+        ...state,
+        filtered: null,
       };
     default:
       return state;
