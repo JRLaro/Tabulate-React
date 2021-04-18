@@ -1,9 +1,13 @@
 import React from 'react'
+import NoteForm from '../notes/NoteForm'
+import Notes from '../notes/Notes'
 
 function Home() {
     return (
-        <div>
-           <h1>This is the Home Page</h1> 
+        <div class='grid-2'>
+            <div><Notes /></div>
+            <div><NoteForm /></div>
+            
         </div>
     )
 }

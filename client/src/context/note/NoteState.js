@@ -17,23 +17,23 @@ const NoteState = (props) => {
     notes: [
       {
         id: 1,
-        title: "The First TITLE",
-        body: "The First Body",
+        title: " First TITLE",
+        body: " Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
       },
       {
         id: 2,
-        title: "The Second TITLE",
-        body: "The Second Body",
+        title: " Second TITLE",
+        body: " Second Body",
       },
       {
         id: 3,
-        title: "The Third TITLE",
-        body: "The Third Body",
+        title: " Third TITLE",
+        body: " Third Body",
       },
       {
         id: 4,
-        title: "The Fourth TITLE",
-        body: "The Fourth Body",
+        title: " Fourth TITLE",
+        body: " Fourth Body",
       },
     ],
   };
