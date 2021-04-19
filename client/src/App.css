@@ -47,6 +47,12 @@ img {
   overflow: hidden;
   padding: 0 2rem;
 }
+.reg-container {
+  max-width: 500px;
+  margin: auto;
+  overflow: hidden;
+  padding: 0 2rem;
+}
 
 /* Text Styles*/
 .x-large {
