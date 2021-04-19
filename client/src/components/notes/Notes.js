@@ -1,4 +1,5 @@
 import React, { Fragment, useContext } from "react";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 import NoteContext from "../../context/note/noteContext";
 import NoteItems from "./NoteItems";
 
@@ -12,9 +13,19 @@ function Notes() {
 
   return (
     <Fragment>
-      {filtered !== null
-        ? filtered.map((note) => <NoteItems key={note.id} note={note} />)
-        : notes.map((note) => <NoteItems key={note.id} note={note} />)}
+      <TransitionGroup>
+        {filtered !== null
+          ? filtered.map((note) => (
+              <CSSTransition key={note.id} timeout={500} classNames="note">
+                <NoteItems note={note} />
+              </CSSTransition>
+            ))
+          : notes.map((note) => (
+              <CSSTransition key={note.id} timeout={500} classNames="note">
+                <NoteItems note={note} />
+              </CSSTransition>
+            ))}
+      </TransitionGroup>
     </Fragment>
   );
 }

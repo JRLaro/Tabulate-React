@@ -389,6 +389,29 @@ table th {
   font-size: 35px;
 }
 
+/* Aniimation */
+.note-enter {
+  opacity: 0;
+  transform: translateX(0);
+}
+
+.note-enter-active {
+  opacity: 1;
+  transition: opacity 250ms ease-in-out;
+  transform: translateX(-100%);
+}
+
+.note-exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.note-exit-active {
+  opacity: 0;
+  transition:  opacity 250ms ease-in-out;
+  transform: translateX(-100%);
+}
+
 /* Mobile Styles */
 @media (max-width: 700px) {
   .hide-sm {
