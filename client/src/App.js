@@ -11,6 +11,8 @@ import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import Alerts from "./components/layout/Alerts";
 import setAuthToken from "./utils/setAuthToken";
+import PrivateRoute from "./components/routing/PrivateRoute";
+import NotFound from "./components/pages/NotFound";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token)
@@ -26,10 +28,11 @@ function App() {
               <div className="container">
               <Alerts />
                 <Switch>
-                  <Route exact path="/" component={Home} />
+                  <PrivateRoute exact path="/" component={Home} />
                   <Route exact path="/about" component={About} />
                   <Route exact path="/register" component={Register} />
                   <Route exact path="/login" component={Login} />
+                  <Route component={NotFound}/>
                 </Switch>
               </div>
             </Fragment>
