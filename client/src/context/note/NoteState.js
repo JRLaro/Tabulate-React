@@ -4,6 +4,7 @@ import axios from 'axios';
 import NoteContext from "./noteContext";
 import noteReducer from "./noteReducer";
 import {
+  GET_NOTES,
   ADD_NOTE,
   NOTE_ERROR,
   DELETE_NOTE,
@@ -12,17 +13,35 @@ import {
   UPDATE_NOTE,
   FILTER_NOTE,
   CLEAR_FILTER,
+  CLEAR_NOTES,
 } from "../types";
 
 const NoteState = (props) => {
   const initialState = {
-    notes: [],
+    notes: null,
     current: null,
     filtered: null,
     error: null
   };
 
   const [state, dispatch] = useReducer(noteReducer, initialState);
+
+//Get Note
+
+const getNotes = async () => {
+
+  try {
+    const res = await axios.get('/api/notes')
+    dispatch({ type: GET_NOTES, payload: res.data });
+  } catch (err) {
+    dispatch({
+      type: NOTE_ERROR,
+    payload: err.response.msg})
+  }
+  
+
+};
+
 
   //Add Note
   const addNote = async (note) => {
@@ -53,6 +72,13 @@ const NoteState = (props) => {
   const setCurrent = (note) => {
     dispatch({ type: SET_CURRENT, payload: note });
   };
+
+  // Clear Notes
+
+  const clearNotes = () => {
+    dispatch({ type: CLEAR_NOTES });
+  };
+
   
   //Clear Current Note
   const clearCurrent = () => {
@@ -88,7 +114,9 @@ const NoteState = (props) => {
         clearCurrent,
         updateNote,
         filterNote,
-        clearFilter
+        clearFilter,
+        getNotes,
+        clearNotes
       }}
     >
       {props.children}

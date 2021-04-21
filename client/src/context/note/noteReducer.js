@@ -1,4 +1,5 @@
 import {
+  GET_NOTES,
   ADD_NOTE,
   DELETE_NOTE,
   SET_CURRENT,
@@ -6,14 +7,22 @@ import {
   UPDATE_NOTE,
   FILTER_NOTE,
   CLEAR_FILTER,
+  // CLEAR_NOTES
 } from "../types";
 
 export default (state, action) => {
   switch (action.type) {
+    case GET_NOTES:
+      return {
+        ...state,
+        notes: action.payload,
+        loading: false
+      }
     case ADD_NOTE:
       return {
         ...state,
         notes: [...state.notes, action.payload],
+        loading: false
       };
     case UPDATE_NOTE:
       return {
@@ -21,11 +30,13 @@ export default (state, action) => {
         notes: state.notes.map((note) =>
           note.id === action.payload.id ? action.payload : note
         ),
+        loading: false
       };
     case DELETE_NOTE:
       return {
         ...state,
         notes: state.notes.filter((note) => note.id !== action.payload),
+        loading: false
       };
     case SET_CURRENT:
       return {
@@ -50,10 +61,13 @@ export default (state, action) => {
         ...state,
         filtered: null,
       };
-    case NOTE_ERROR:
+    case CLEAR_NOTES:
       return {
         ...state,
-        error: action.payload
+        notes: null,
+        filtered: null, 
+        error: null, 
+        current: null
       }
     default:
       return state;
