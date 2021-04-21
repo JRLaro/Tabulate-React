@@ -36,10 +36,6 @@ function NoteForm() {
       } else {
           updateNote(note);
       }
-    // setNote({
-    //   title: "",
-    //   body: "",
-    // });
   };
     
     const clearAll = () => {

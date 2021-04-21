@@ -7,7 +7,8 @@ import {
   UPDATE_NOTE,
   FILTER_NOTE,
   CLEAR_FILTER,
-  // CLEAR_NOTES
+  CLEAR_NOTES,
+  NOTE_ERROR,
 } from "../types";
 
 export default (state, action) => {
@@ -16,27 +17,27 @@ export default (state, action) => {
       return {
         ...state,
         notes: action.payload,
-        loading: false
-      }
+        loading: false,
+      };
     case ADD_NOTE:
       return {
         ...state,
-        notes: [...state.notes, action.payload],
-        loading: false
+        notes: [action.payload, ...state.notes],
+        loading: false,
       };
     case UPDATE_NOTE:
       return {
         ...state,
         notes: state.notes.map((note) =>
-          note.id === action.payload.id ? action.payload : note
+          note._id === action.payload._id ? action.payload : note
         ),
-        loading: false
+        loading: false,
       };
     case DELETE_NOTE:
       return {
         ...state,
-        notes: state.notes.filter((note) => note.id !== action.payload),
-        loading: false
+        notes: state.notes.filter((note) => note._id !== action.payload),
+        loading: false,
       };
     case SET_CURRENT:
       return {
@@ -65,10 +66,15 @@ export default (state, action) => {
       return {
         ...state,
         notes: null,
-        filtered: null, 
-        error: null, 
-        current: null
-      }
+        filtered: null,
+        error: null,
+        current: null,
+      };
+    case NOTE_ERROR:
+      return {
+        ...state,
+        error: action.payload,
+      };
     default:
       return state;
   }

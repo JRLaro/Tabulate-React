@@ -7,10 +7,10 @@ function NoteItems({ note }) {
     
     const {deleteNote, setCurrent, clearCurrent} = noteContext
 
-  const { id, title, body,  } = note;
+  const { _id, title, body,  } = note;
 
     const onDelete = () => {
-        deleteNote(id);
+        deleteNote(_id);
         clearCurrent();
     }
 

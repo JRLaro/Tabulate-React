@@ -1,5 +1,5 @@
 import React, { useReducer } from "react";
-import axios from 'axios';
+import axios from "axios";
 
 import NoteContext from "./noteContext";
 import noteReducer from "./noteReducer";
@@ -21,53 +21,76 @@ const NoteState = (props) => {
     notes: null,
     current: null,
     filtered: null,
-    error: null
+    error: null,
   };
 
   const [state, dispatch] = useReducer(noteReducer, initialState);
 
-//Get Note
+  //Get Note
 
-const getNotes = async () => {
-
-  try {
-    const res = await axios.get('/api/notes')
-    dispatch({ type: GET_NOTES, payload: res.data });
-  } catch (err) {
-    dispatch({
-      type: NOTE_ERROR,
-    payload: err.response.msg})
-  }
-  
-
-};
-
+  const getNotes = async () => {
+    try {
+      const res = await axios.get("/api/notes");
+      dispatch({ type: GET_NOTES, payload: res.data });
+    } catch (err) {
+      dispatch({
+        type: NOTE_ERROR,
+        payload: err.response.msg,
+      });
+    }
+  };
 
   //Add Note
   const addNote = async (note) => {
-  const config = {
-    header: {
-      'Content-Type': 'application/json'
-    }
-  }
+    const config = {
+      header: {
+        "Content-Type": "application/json",
+      },
+    };
     try {
-      const res = await axios.post('/api/notes', note, config)
+      const res = await axios.post("/api/notes", note, config);
       dispatch({ type: ADD_NOTE, payload: res.data });
     } catch (err) {
       dispatch({
         type: NOTE_ERROR,
-      payload: err.response.msg})
+        payload: err.response.msg,
+      });
     }
-    
+  };
 
+  //Update Note
+  const updateNote = async (note) => {
+    const config = {
+      header: {
+        "Content-Type": "application/json",
+      },
+    };
+    try {
+      const res = await axios.put(`/api/notes/${note._id}`, note, config);
+      dispatch({ type: UPDATE_NOTE, payload: res.data });
+    } catch (err) {
+      dispatch({
+        type: NOTE_ERROR,
+        payload: err.response.msg,
+      });
+    }
+   
   };
 
   //Delete Note
 
-  const deleteNote = (id) => {
-    dispatch({ type: DELETE_NOTE, payload: id });
+  const deleteNote = async (id) => {
+    try {
+      await axios.delete(`/api/notes/${id}`);
+      dispatch({ type: DELETE_NOTE, payload: id });
+    } catch (err) {
+      dispatch({
+        type: NOTE_ERROR,
+        payload: err.response.msg,
+      });
+    }
   };
-  
+
   //Set Current Note
   const setCurrent = (note) => {
     dispatch({ type: SET_CURRENT, payload: note });
@@ -79,18 +102,13 @@ const getNotes = async () => {
     dispatch({ type: CLEAR_NOTES });
   };
 
-  
   //Clear Current Note
   const clearCurrent = () => {
     dispatch({ type: CLEAR_CURRENT });
   };
 
-  //Update Note
-  const updateNote = (note) => {
-    dispatch({ type: UPDATE_NOTE, payload: note });
-  };
   //Filter Note
-  
+
   const filterNote = (text) => {
     dispatch({ type: FILTER_NOTE, payload: text });
   };
@@ -99,7 +117,6 @@ const getNotes = async () => {
   const clearFilter = () => {
     dispatch({ type: CLEAR_FILTER });
   };
-
 
   return (
     <NoteContext.Provider
@@ -116,7 +133,7 @@ const getNotes = async () => {
         filterNote,
         clearFilter,
         getNotes,
-        clearNotes
+        clearNotes,
       }}
     >
       {props.children}

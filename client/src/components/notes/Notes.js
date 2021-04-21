@@ -11,7 +11,7 @@ function Notes() {
   useEffect(() => {
     getNotes();
     // eslint-disable-next-line
-})
+}, [])
 
   if (notes !== null && notes.length === 0 && !loading) {
     return <h4> Please add a Note</h4>;
