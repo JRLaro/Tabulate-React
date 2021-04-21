@@ -16,12 +16,12 @@ function Notes() {
       <TransitionGroup>
         {filtered !== null
           ? filtered.map((note) => (
-              <CSSTransition key={note.id} timeout={500} classNames="note">
+              <CSSTransition key={note._id} timeout={500} classNames="note">
                 <NoteItems note={note} />
               </CSSTransition>
             ))
           : notes.map((note) => (
-              <CSSTransition key={note.id} timeout={500} classNames="note">
+              <CSSTransition key={note._id} timeout={500} classNames="note">
                 <NoteItems note={note} />
               </CSSTransition>
             ))}

@@ -1,9 +1,11 @@
 import React, { useReducer } from "react";
-import { v4 as uuidv4 } from "uuid";
+import axios from 'axios';
+
 import NoteContext from "./noteContext";
 import noteReducer from "./noteReducer";
 import {
   ADD_NOTE,
+  NOTE_ERROR,
   DELETE_NOTE,
   SET_CURRENT,
   CLEAR_CURRENT,
@@ -14,39 +16,31 @@ import {
 
 const NoteState = (props) => {
   const initialState = {
-    notes: [
-      {
-        id: 1,
-        title: " First TITLE",
-        body:
-          " Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      },
-      {
-        id: 2,
-        title: "Second TITLE",
-        body: " Second Body",
-      },
-      {
-        id: 3,
-        title: "Third TITLE",
-        body: " Third Body",
-      },
-      {
-        id: 4,
-        title: "Fourth TITLE",
-        body: " Fourth Body",
-      },
-    ],
+    notes: [],
     current: null,
-    filtered: null
+    filtered: null,
+    error: null
   };
 
   const [state, dispatch] = useReducer(noteReducer, initialState);
 
   //Add Note
-  const addNote = (note) => {
-    note.id = uuidv4();
-    dispatch({ type: ADD_NOTE, payload: note });
+  const addNote = async (note) => {
+  const config = {
+    header: {
+      'Content-Type': 'application/json'
+    }
+  }
+    try {
+      const res = await axios.post('/api/notes', note, config)
+      dispatch({ type: ADD_NOTE, payload: res.data });
+    } catch (err) {
+      dispatch({
+        type: NOTE_ERROR,
+      payload: err.response.msg})
+    }
+    
+
   };
 
   //Delete Note
@@ -87,6 +81,7 @@ const NoteState = (props) => {
         notes: state.notes,
         current: state.current,
         filtered: state.filtered,
+        error: state.error,
         addNote,
         deleteNote,
         setCurrent,

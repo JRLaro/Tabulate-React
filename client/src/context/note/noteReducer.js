@@ -50,6 +50,11 @@ export default (state, action) => {
         ...state,
         filtered: null,
       };
+    case NOTE_ERROR:
+      return {
+        ...state,
+        error: action.payload
+      }
     default:
       return state;
   }

@@ -1,4 +1,5 @@
 export const ADD_NOTE = 'ADD_NOTE';
+export const NOTE_ERROR = 'NOTE_ERROR'
 export const DELETE_NOTE = 'DELETE_NOTE';
 export const SET_CURRENT = 'SET_CURRENT';
 export const CLEAR_CURRENT = 'CLEAR_CURRENT';

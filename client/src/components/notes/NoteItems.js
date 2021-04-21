@@ -7,7 +7,7 @@ function NoteItems({ note }) {
     
     const {deleteNote, setCurrent, clearCurrent} = noteContext
 
-  const { id, title, body } = note;
+  const { id, title, body,  } = note;
 
     const onDelete = () => {
         deleteNote(id);
@@ -27,6 +27,7 @@ function NoteItems({ note }) {
             
           </li>
         )}
+        
       </ul>
       <p>
         <button className="btn btn-dark btn-sm" onClick={() => setCurrent(note)}>View</button>
