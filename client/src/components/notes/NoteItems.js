@@ -13,6 +13,7 @@ function NoteItems({ note }) {
         deleteNote(id);
         clearCurrent();
     }
+
     
   return (
     <div className="card bg-light">
@@ -21,12 +22,14 @@ function NoteItems({ note }) {
         {body && (
           <li>
             <i class="far fa-comment-dots"></i>
-            {body}
+            {/* {body} */}
+            {note.body.length > 30 ? `${note.body.slice(0, 50)}...` : note.body}
+            
           </li>
         )}
       </ul>
       <p>
-        <button className="btn btn-dark btn-sm" onClick={() => setCurrent(note)}>Edit</button>
+        <button className="btn btn-dark btn-sm" onClick={() => setCurrent(note)}>View</button>
         <button className="btn btn-danger btn-sm" onClick={onDelete}>
           Delete
         </button>
