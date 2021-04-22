@@ -1,6 +1,6 @@
 const express = require("express");
 const connectDB = require("./config/db");
-const path = require('path');
+const path = require("path");
 // initialize express into 'app'
 const app = express();
 
@@ -9,9 +9,6 @@ connectDB();
 
 //init middleware
 app.use(express.json({ extended: false }));
-
-// testing route
-app.get("/", (req, res) => res.json({ msg: "Tabulate" }));
 
 //define ROUTES
 
