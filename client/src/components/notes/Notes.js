@@ -14,7 +14,7 @@ function Notes() {
 }, [])
 
   if (notes !== null && notes.length === 0 && !loading) {
-    return <h4> Please add a Note</h4>;
+    return <h4> Let's get started. Please Add a note.</h4>;
   }
 
   return (
