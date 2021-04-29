@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import AuthContext from "../../context/auth/authContext";
 import NoteContext from "../../context/note/noteContext";
+import logo from '../../images/tabulateLogo-01.png'
 
 function Navbar({ title, icon }) {
   const authContext = useContext(AuthContext);
@@ -30,21 +31,22 @@ function Navbar({ title, icon }) {
   );
 
   const guestLinks = (
-    <Fragment>
+    <Fragment >
       <li>
-        <Link to="/register"> Register </Link>
+        <Link to="/register" className='text-dark'> Register </Link>
       </li>
       <li>
-        <Link to="/login"> Login </Link>
+        <Link to="/login" className='text-dark'> Login </Link>
       </li>
     </Fragment>
   );
 
   return (
     <Fragment>
-      <div className="navbar bg-primary">
+      <div className="navbar bg-light">
         <h1>
-          <i className={icon} /> {title}
+          {/* <i className={icon} /> {title} */}
+          <img src={logo} alt="logo" style={{width:'75px'}}/>
         </h1>
         <ul>{isAuthenticated ? authLinks : guestLinks}</ul>
       </div>

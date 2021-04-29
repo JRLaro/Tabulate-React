@@ -78,8 +78,6 @@ function Login(props) {
           value="Login"
           className="btn btn-primary btn-block"
         />
-        <div className="g-signin2" data-onsuccess="onSignIn"></div>
-        {/* <a href="#" onclick="signOut();">Sign out</a> */}
       </form>
     </div>
   );

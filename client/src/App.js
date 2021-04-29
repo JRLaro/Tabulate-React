@@ -13,6 +13,7 @@ import Alerts from "./components/layout/Alerts";
 import setAuthToken from "./utils/setAuthToken";
 import PrivateRoute from "./components/routing/PrivateRoute";
 import NotFound from "./components/pages/NotFound";
+import Intro from "./components/pages/Intro";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token)
@@ -28,6 +29,7 @@ function App() {
               <div className="container">
               <Alerts />
                 <Switch>
+                  <Route exact path ='/hello' component={Intro} />
                   <PrivateRoute exact path="/" component={Home} />
                   <Route exact path="/about" component={About} />
                   <Route exact path="/register" component={Register} />
