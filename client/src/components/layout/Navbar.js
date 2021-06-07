@@ -23,8 +23,8 @@ function Navbar({ title, icon }) {
       </li>
       <li>
         <a href="#!" onClick={onLogout}>
-          <i className="fas fa-sign-out-alt"></i>
-          <span className="hide-sm"> Logout</span>
+          <i className="fas fa-sign-out-alt text-dark"></i>
+          {/* <span className="text-dark"> Logout</span> */}
         </a>
       </li>
     </Fragment>
