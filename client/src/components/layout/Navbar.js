@@ -16,10 +16,14 @@ function Navbar({ title, icon }) {
     clearNotes();
   };
 
+  const navStyle = {
+    color: '#899f70'
+  }
+
   const authLinks = (
     <Fragment>
       <li>
-        Welcome <strong>{user && user.name}</strong>{" "}
+        Welcome <strong>{user && user.name}</strong>
       </li>
       <li>
         <a href="#!" onClick={onLogout}>
@@ -42,8 +46,8 @@ function Navbar({ title, icon }) {
   );
 
   return (
-    <Fragment>
-      <div className="navbar bg-light">
+    <Fragment >
+      <div className="navbar">
         <h1>
           {/* <i className={icon} /> {title} */}
           <img src={logo} alt="logo" style={{width:'75px'}}/>
